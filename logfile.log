@@ -1,0 +1,19 @@
+[2024-08-12 21:10:42] [ INFO ] [DaoH2Odontologo:36] Odontologo guardado: model.Odontologo@821330f
+[2024-08-12 21:10:42] [ INFO ] [DaoH2Odontologo:36] Odontologo guardado: model.Odontologo@4dc27487
+[2024-08-12 21:10:42] [ INFO ] [DaoH2Odontologo:36] Odontologo guardado: model.Odontologo@5dafbe45
+[2024-08-12 21:10:42] [ INFO ] [DaoH2Odontologo:84] Odontologo agregado a la lista: model.Odontologo@3bcd05cb
+[2024-08-12 21:10:42] [ INFO ] [DaoH2Odontologo:84] Odontologo agregado a la lista: model.Odontologo@3b6d844d
+[2024-08-12 21:10:42] [ INFO ] [DaoH2Odontologo:84] Odontologo agregado a la lista: model.Odontologo@36804139
+[2024-08-12 21:11:40] [ INFO ] [DaoH2Odontologo:36] Odontologo guardado: model.Odontologo@2657d4dd
+[2024-08-12 21:11:40] [ INFO ] [DaoH2Odontologo:36] Odontologo guardado: model.Odontologo@7bbc8656
+[2024-08-12 21:11:40] [ INFO ] [DaoH2Odontologo:36] Odontologo guardado: model.Odontologo@5dafbe45
+[2024-08-12 21:11:40] [ INFO ] [DaoH2Odontologo:84] Odontologo agregado a la lista: model.Odontologo@3bcd05cb
+[2024-08-12 21:11:40] [ INFO ] [DaoH2Odontologo:84] Odontologo agregado a la lista: model.Odontologo@3b6d844d
+[2024-08-12 21:11:40] [ INFO ] [DaoH2Odontologo:84] Odontologo agregado a la lista: model.Odontologo@36804139
+[2024-08-12 21:11:40] [ INFO ] [testOdontologo:55] [model.Odontologo@3bcd05cb, model.Odontologo@3b6d844d, model.Odontologo@36804139]
+[2024-08-12 21:25:29] [ INFO ] [DaoEnMemoria:16] Odontologo guardado en memoria: model.Odontologo@17c386de
+[2024-08-12 21:25:29] [ INFO ] [DaoEnMemoria:16] Odontologo guardado en memoria: model.Odontologo@4034c28c
+[2024-08-12 21:25:29] [ INFO ] [DaoEnMemoria:16] Odontologo guardado en memoria: model.Odontologo@14ec4505
+[2024-08-12 21:25:29] [ INFO ] [DaoEnMemoria:22] Odontologos encontrados en memoria: [model.Odontologo@17c386de, model.Odontologo@4034c28c, model.Odontologo@14ec4505]
+[2024-08-12 21:25:29] [ INFO ] [DaoEnMemoria:22] Odontologos encontrados en memoria: [model.Odontologo@17c386de, model.Odontologo@4034c28c, model.Odontologo@14ec4505]
+[2024-08-12 21:25:29] [ INFO ] [testOdontologoEnMemoria:34] [model.Odontologo@17c386de, model.Odontologo@4034c28c, model.Odontologo@14ec4505]
