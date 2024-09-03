@@ -1,4 +1,4 @@
-package Odontologo.com.Empresa.db;
+package finalproject.com.Clinica_Odontologica.db;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +12,7 @@ public class H2Connection {
     static final Logger logger = LoggerFactory.getLogger(H2Connection.class);
 
     private final static String DB_JDBC_DRIVER = "org.h2.Driver";
-    private final static String DB_URL = "jdbc:h2:./examen.database";
+    private final static String DB_URL = "jdbc:h2:./clinica.database";
     private final static String DB_USER = "sa";
     private final static String DB_PASS = "sa";
     public static  Connection getConnection() throws ClassNotFoundException, SQLException {
@@ -24,7 +24,7 @@ public class H2Connection {
         Connection connection = null;
         try {
             Class.forName("org.h2.Driver");
-            connection = DriverManager.getConnection("jdbc:h2:~/examen.database;INIT=RUNSCRIPT FROM 'C:/Users/linkm/Downloads/demo/create.sql'", "sa", "sa");
+            connection = DriverManager.getConnection("jdbc:h2:~/clinica.database;INIT=RUNSCRIPT FROM './clinica.database'", "sa", "sa");
         } catch (Exception e) {
             e.printStackTrace();
             logger.error(e.getMessage());
@@ -36,5 +36,4 @@ public class H2Connection {
             }
         }
     }
-
 }
