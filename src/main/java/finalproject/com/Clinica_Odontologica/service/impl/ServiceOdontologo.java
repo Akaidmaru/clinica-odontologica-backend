@@ -1,7 +1,7 @@
 package finalproject.com.Clinica_Odontologica.service.impl;
 
 import finalproject.com.Clinica_Odontologica.entity.Odontologo;
-import finalproject.com.Clinica_Odontologica.respository.IOdontologoRepository;
+import finalproject.com.Clinica_Odontologica.repository.IOdontologoRepository;
 import finalproject.com.Clinica_Odontologica.service.IOdontologoService;
 import org.springframework.stereotype.Service;
 
@@ -11,10 +11,10 @@ import java.util.Optional;
 @Service
 public class ServiceOdontologo implements IOdontologoService {
 
-    private IOdontologoService odontologoService;
+    private IOdontologoRepository odontologoRepository;
 
     public ServiceOdontologo(IOdontologoRepository IOdontologoRepository) {
-        this.odontologoService = IOdontologoService;
+        this.odontologoRepository = IOdontologoRepository;
     }
 
     @Override
@@ -44,21 +44,21 @@ public class ServiceOdontologo implements IOdontologoService {
 
     @Override
     public List<Odontologo> buscarApellido(String apellido) {
-        return odontologoRepository.findByFullName(appelido);
+        return odontologoRepository.buscarApellido(apellido);
     }
 
     @Override
     public List<Odontologo> buscarNombre(String nombre) {
-        return odontologoRepository.findByFullName(nombre);
+        return odontologoRepository.buscarNombre(nombre);
     }
 
     @Override
     public List<Odontologo> buscarApellidoNombre(String apellido, String nombre) {
-        return odontologoRepository.findByFullName(appelido, nombre);
+        return odontologoRepository.buscarApellidoNombre(apellido, nombre);
     }
 
     @Override
     public Optional<Odontologo> buscarMatricula(String matricula) {
-        return odontologoRepository.findByMatricula(matricula);
+        return odontologoRepository.buscarMatricula(matricula);
     }
 }
