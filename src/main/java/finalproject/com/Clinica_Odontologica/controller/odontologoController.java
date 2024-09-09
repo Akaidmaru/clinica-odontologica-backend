@@ -11,7 +11,6 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/odontologo")
-
 public class odontologoController {
 
     private ServiceOdontologo serviceOdontologo;
@@ -37,52 +36,48 @@ public class odontologoController {
 
     @GetMapping("/buscartodos")
     public ResponseEntity<List<Odontologo>> buscartodos(){
-        return ResponseEntity.ok(serviceOdontologo.buscartodos());
+        return ResponseEntity.ok(serviceOdontologo.buscarTodos());
     }
 
     @PutMapping("/modificar")
-    public ResponseEntity<Odontologo> modificarOdontologo(@RequestBody Odontologo odontologo){
+    public ResponseEntity<?> modificarOdontologo(@RequestBody Odontologo odontologo) {
         Optional<Odontologo> odontologoEncontrado = serviceOdontologo.buscarId(odontologo.getId());
-        if (odontologoEncontrado.isPresent()){
+        if (odontologoEncontrado.isPresent()) {
             serviceOdontologo.modificarOdontologo(odontologoEncontrado.get());
             String jsonResponse = "{\"mensaje\": \"El odontólogo ha sido modificado\"}";
-            return ResponseEntity.ok(jsonResponse); //FIX
-        }
-        else{
+            return ResponseEntity.ok(jsonResponse);
+        } else {
             return ResponseEntity.notFound().build();
         }
-
-        @DeleteMapping("/eliminar/{id}")
-        public ResponseEntity<?> eliminarOdontologo(@PathVariable Integer id){
-            Optional<Odontologo> odontologoAEliminar = serviceOdontologo.buscarId(id);
-            if (odontologoAEliminar.isPresent()){
-                serviceOdontologo.eliminarOdontologo(id);
-                String jsonResponse = "{\"mensaje\": \"El odontólogo ha sido eliminado\"}";
-                return ResponseEntity.ok(jsonResponse);
+    }
+    @DeleteMapping("/eliminar/{id}")
+    public ResponseEntity<?> eliminarOdontologo(@PathVariable Integer id)
+    {Optional<Odontologo> odontologoAEliminar = serviceOdontologo.buscarId(id);
+        if (odontologoAEliminar.isPresent()){
+            serviceOdontologo.eliminarOdontologo(id);
+            String jsonResponse = "{\"mensaje\": \"El odontólogo ha sido eliminado\"}";
+            return ResponseEntity.ok(jsonResponse);
             }
-            else {
-                return ResponseEntity.notFound().build();
+        else {
+            return ResponseEntity.notFound().build();
             }
         }
 
-        @GetMapping("/buscarApellido/{apellido}")
-        public ResponseEntity<List<Odontologo>> buscarApellido(@PathVariable String apellido){
-            return ResponseEntity.ok(serviceOdontologo.buscarApellido(apellido));
+    @GetMapping("/buscarApellido/{apellido}")
+    public ResponseEntity<List<Odontologo>> buscarApellido(@PathVariable String apellido){
+        return ResponseEntity.ok(serviceOdontologo.buscarApellido(apellido));
 
-        }
+    }
 
-        @GetMapping("/buscarNombre/{nombre}")
-        public ResponseEntity<List<Odontologo>> buscarNombre(@PathVariable String nombre){
-            return ResponseEntity.ok(serviceOdontologo.buscarNombre(nombre));
+    @GetMapping("/buscarNombre/{nombre}")
+    public ResponseEntity<List<Odontologo>> buscarNombre(@PathVariable String nombre){
+        return ResponseEntity.ok(serviceOdontologo.buscarNombre(nombre));
 
-        }
+    }
 
-        @GetMapping("/buscarApellidoNombre/{apellido}/{nombre}")
-        public ResponseEntity<List<Odontologo>> buscarApellido(@RequestParam String apellido, String nombre){
-            return ResponseEntity.ok(serviceOdontologo.buscarApellidoNombre(apellido,nombre));
-
-        }
-
+    @GetMapping("/buscarApellidoNombre/{apellido}/{nombre}")
+    public ResponseEntity<List<Odontologo>> buscarApellidoNombre(@RequestParam String apellido, String nombre){
+        return ResponseEntity.ok(serviceOdontologo.buscarApellidoNombre(apellido,nombre));
 
     }
 
@@ -96,7 +91,5 @@ public class odontologoController {
             return ResponseEntity.status(HttpStatusCode.valueOf(404)).build();
         }
     }
+    }
 
-
-
-}
