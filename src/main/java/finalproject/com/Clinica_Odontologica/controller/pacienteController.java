@@ -77,12 +77,6 @@ public class pacienteController {
 
     }
 
-    @GetMapping("/buscarApellidoNombre/{apellido}/{nombre}")
-    public ResponseEntity<List<Paciente>> buscarApellidoNombre(@RequestParam String apellido, String nombre){
-        return ResponseEntity.ok(servicePaciente.buscarApellidoNombre(apellido,nombre));
-
-    }
-
     @GetMapping("/buscar/{dni}")
     public ResponseEntity<Optional<Paciente>> buscarDni(@PathVariable String dni){
         Optional<Paciente> pacienteEncontrado = servicePaciente.buscarDni(dni);

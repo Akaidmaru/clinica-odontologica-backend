@@ -34,17 +34,6 @@ public class turnoController {
     }
 
 
-    /*@GetMapping("/buscar/{id}")
-    public ResponseEntity<Turno> buscarId(@PathVariable Integer id){
-        Optional<?> turnoEncontrado = serviceTurno.buscarId(id);
-        if (turnoEncontrado.isPresent()){
-            return ResponseEntity.ok(turnoEncontrado.getId());
-        }
-        else {
-            return ResponseEntity.status(HttpStatusCode.valueOf(404)).build();
-        }
-    }*/
-
     @GetMapping("/buscartodos")
     public ResponseEntity<List<TurnoResponseDto>> buscarTodos(){
         return ResponseEntity.ok(serviceTurno.buscarTodos());

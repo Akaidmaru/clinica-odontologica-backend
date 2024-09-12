@@ -28,7 +28,7 @@ public class ServicePaciente implements IPacienteService {
 
     @Override
     public Optional<Paciente> buscarDni(String dni){
-        return pacienteRepository.buscarDni(dni);
+        return pacienteRepository.findByDni(dni);
     }
 
 
@@ -49,17 +49,12 @@ public class ServicePaciente implements IPacienteService {
 
     @Override
     public List<Paciente> buscarNombre(String nombre){
-        return pacienteRepository.buscarNombre(nombre);
+        return pacienteRepository.findByNombre(nombre);
     }
 
     @Override
     public List<Paciente> buscarApellido(String apellido){
-        return pacienteRepository.buscarApellido(apellido);
-    }
-
-    @Override
-    public List<Paciente> buscarApellidoNombre(String apellido, String nombre){
-        return pacienteRepository.buscarApellidoNombre(apellido, nombre);
+        return pacienteRepository.findByApellido(apellido);
     }
 
 }
