@@ -11,7 +11,7 @@ import java.util.Optional;
 
 
 public interface ITurnoService {
-    TurnoRequestDto guardarTurno(TurnoRequestDto turnoRequestDto);
+    TurnoResponseDto guardarTurno(TurnoRequestDto turnoRequestDto);
 
     Optional<TurnoResponseDto> buscarId(Integer id);
 
