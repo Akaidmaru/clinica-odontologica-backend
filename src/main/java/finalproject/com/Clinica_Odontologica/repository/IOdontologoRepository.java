@@ -10,7 +10,6 @@ import java.util.Optional;
 
 @Repository
 public interface IOdontologoRepository extends JpaRepository<Odontologo, Integer>{
-    List<Odontologo> buscarApellidoNombre(String apellido, String nombre);
 
     @Query("SELECT P FROM ODONTOLOGO P WHERE P.NOMBRE LIKE %:NOMBRE%")
     List<Odontologo> buscarNombre(String nombre);

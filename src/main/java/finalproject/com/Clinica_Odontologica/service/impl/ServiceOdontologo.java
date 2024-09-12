@@ -52,10 +52,6 @@ public class ServiceOdontologo implements IOdontologoService {
         return odontologoRepository.buscarNombre(nombre);
     }
 
-    @Override
-    public List<Odontologo> buscarApellidoNombre(String apellido, String nombre) {
-        return odontologoRepository.buscarApellidoNombre(apellido, nombre);
-    }
 
     @Override
     public Optional<Odontologo> buscarMatricula(String matricula) {

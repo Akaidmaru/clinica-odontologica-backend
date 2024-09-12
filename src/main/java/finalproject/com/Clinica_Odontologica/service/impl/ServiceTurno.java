@@ -113,12 +113,12 @@ public class ServiceTurno implements ITurnoService {
     }
 
     @Override
-    public List<Turno> buscarTurnoPaciente(String apellidoPacinte){
-        return turnoRepository.buscarTurnoApellidoPaciente(apellidoPacinte);
+    public List<Turno> buscarTurnoPaciente(String apellidoPaciente){
+        return turnoRepository.buscarTurnoApellidoPaciente(apellidoPaciente);
     }
 
     @Override
-    public List<Turno> buscarTurnoOdontologo(String matriculaOdontolo){
-        return turnoRepository.buscarTurnoMatriculaOdontologo(matriculaOdontolo);
+    public List<Turno> buscarTurnoOdontologo(String matriculaOdontologo){
+        return turnoRepository.buscarTurnoMatriculaOdontologo(matriculaOdontologo);
     }
 }
