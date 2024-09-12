@@ -2,14 +2,15 @@ package finalproject.com.Clinica_Odontologica.service.impl;
 
 import finalproject.com.Clinica_Odontologica.dto.request.*;
 import finalproject.com.Clinica_Odontologica.dto.response.*;
-import import finalproject.com.Clinica_Odontologica.entity.Odontologo;
-import import finalproject.com.Clinica_Odontologica.entity.Paciente;
-import import finalproject.com.Clinica_Odontologica.entity.Turno;
-import import finalproject.com.Clinica_Odontologica.repository.ITurnoRepository;
-import import finalproject.com.Clinica_Odontologica.service.ITurnoService;
-import import finalproject.com.Clinica_Odontologica.config.ModelMapperConfig;
+import finalproject.com.Clinica_Odontologica.entity.Odontologo;
+import finalproject.com.Clinica_Odontologica.entity.Paciente;
+import finalproject.com.Clinica_Odontologica.entity.Turno;
+import finalproject.com.Clinica_Odontologica.repository.ITurnoRepository;
+import finalproject.com.Clinica_Odontologica.service.ITurnoService;
+import finalproject.com.Clinica_Odontologica.config.ModelMapperConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.modelmapper.ModelMapper;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ public class ServiceTurno implements ITurnoService {
     private ServicePaciente servicePaciente;
     private ServiceOdontologo serviceOdontologo;
     @Autowired
-    private ModelMapperConfig modelMapperConfig;
+    private ModelMapper modelMapper;
 
     public ServiceTurno(ITurnoRepository turnoRepository, ServicePaciente servicePaciente, ServiceOdontologo serviceOdontologo){
         this.turnoRepository = turnoRepository;
@@ -105,9 +106,9 @@ public class ServiceTurno implements ITurnoService {
     };
 
     private TurnoResponseDto turnoMappingResponse(Turno turno){
-        TurnoResponseDto turnoResponseDto = modelMapperConfig.map(turno, TurnoResponseDto.class);
-        turnoResponseDto.setOdontologoResponseDto(modelMapperConfig.map(turno.getOdontologo(), OdontologoResponseDto.class));
-        turnoResponseDto.setPacienteResponseDto(modelMapperConfig.map(turno.getPaciente(), PacienteResponseDto.class));
+        TurnoResponseDto turnoResponseDto = modelMapper.map(turno, TurnoResponseDto.class);
+        turnoResponseDto.setOdontologoResponseDto(modelMapper.map(turno.getOdontologo(), OdontologoResponseDto.class));
+        turnoResponseDto.setPacienteResponseDto(modelMapper.map(turno.getPaciente(), PacienteResponseDto.class));
         return turnoResponseDto;
     }
 
