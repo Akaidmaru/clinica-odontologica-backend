@@ -2,6 +2,7 @@ package finalproject.com.Clinica_Odontologica.entity;
 
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -17,7 +18,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 @Table(name ="pacientes")
-public class Paciente {
+public class Paciente implements List<Paciente> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

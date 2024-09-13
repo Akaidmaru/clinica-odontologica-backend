@@ -38,8 +38,9 @@ public class ServiceOdontologo implements IOdontologoService {
     }
 
     @Override
-    public void eliminarOdontologo(Integer id) {
+    public Odontologo eliminarOdontologo(Integer id) {
         odontologoRepository.deleteById(id);
+        return null;
     }
 
     @Override
