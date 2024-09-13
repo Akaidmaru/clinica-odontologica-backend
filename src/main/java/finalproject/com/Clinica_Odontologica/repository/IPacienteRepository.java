@@ -11,10 +11,10 @@ import java.util.Optional;
 @Repository
 public interface IPacienteRepository extends JpaRepository<Paciente, Integer>{
 
-    @Query("Select p from Paciente where p.nombre like %:nombre%")
+    @Query("Select p from Paciente p where p.nombre like %:nombre%")
     List<Paciente> findByNombre(String nombre);
 
-    @Query("Select p from Paciente where p.apellido like %:apellido%")
+    @Query("Select p from Paciente p where p.apellido like %:apellido%")
     List<Paciente> findByApellido(String apellido);
 
     Optional<Paciente> findByDni(String matricula);

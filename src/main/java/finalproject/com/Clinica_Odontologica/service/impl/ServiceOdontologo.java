@@ -34,7 +34,7 @@ public class ServiceOdontologo implements IOdontologoService {
 
     @Override
     public void modificarOdontologo(Odontologo odontologo){
-        odontologoRepository.save(odontologo);  //FIX: MAYBE RETURN NEEDED
+        odontologoRepository.save(odontologo);
     }
 
     @Override
@@ -44,17 +44,17 @@ public class ServiceOdontologo implements IOdontologoService {
 
     @Override
     public List<Odontologo> buscarApellido(String apellido) {
-        return odontologoRepository.buscarApellido(apellido);
+        return odontologoRepository.findByApellido(apellido);
     }
 
     @Override
     public List<Odontologo> buscarNombre(String nombre) {
-        return odontologoRepository.buscarNombre(nombre);
+        return odontologoRepository.findByNombre(nombre);
     }
 
 
     @Override
     public Optional<Odontologo> buscarMatricula(String matricula) {
-        return odontologoRepository.buscarMatricula(matricula);
+        return odontologoRepository.findByMatricula(matricula);
     }
 }

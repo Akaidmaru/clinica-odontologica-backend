@@ -11,13 +11,13 @@ import java.util.Optional;
 @Repository
 public interface IOdontologoRepository extends JpaRepository<Odontologo, Integer>{
 
-    @Query("SELECT P FROM ODONTOLOGO P WHERE P.NOMBRE LIKE %:NOMBRE%")
-    List<Odontologo> buscarNombre(String nombre);
+    @Query("SELECT p FROM Odontologo p WHERE p.nombre LIKE %:nombre%")
+    List<Odontologo> findByNombre(String nombre);
 
-    @Query("SELECT P FROM ODONTOLOGO P WHERE P.APELLIDO LIKE %:APELLIDO%")
-    List<Odontologo> buscarApellido(String apellido);
+    @Query("SELECT p FROM Odontologo p WHERE p.apellido LIKE %:apellido%")
+    List<Odontologo> findByApellido(String apellido);
 
-    Optional<Odontologo> buscarMatricula(String matricula); //FIX
+    Optional<Odontologo> findByMatricula(String matricula); //FIX
 
 
 
