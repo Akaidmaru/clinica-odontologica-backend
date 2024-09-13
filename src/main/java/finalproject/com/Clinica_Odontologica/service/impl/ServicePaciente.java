@@ -43,8 +43,9 @@ public class ServicePaciente implements IPacienteService {
     }
 
     @Override
-    public void eliminarPaciente(Integer id){
+    public Paciente eliminarPaciente(Integer id){
         pacienteRepository.deleteById(id);
+        return null; //?????????????????????????????
     }
 
     @Override

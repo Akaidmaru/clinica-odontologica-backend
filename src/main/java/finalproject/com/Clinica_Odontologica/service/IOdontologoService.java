@@ -13,7 +13,7 @@ public interface IOdontologoService {
 
     Optional<Odontologo> buscarId(Integer id);
     void modificarOdontologo(Odontologo odontologo);
-    void eliminarOdontologo(Integer id);
+    Odontologo eliminarOdontologo(Integer id);
 
     @Query("Select p from Odontologo p where p.apellido like %:apellido%")
     List<Odontologo> buscarApellido(String apellido);
