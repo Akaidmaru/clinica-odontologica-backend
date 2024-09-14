@@ -3,7 +3,7 @@
  <img width=200px height=200px src="https://i.imgur.com/8VQLkEZ.jpeg" alt="Project logo"></a>
 </p>
 
-<h3 align="center">Clínica Odontológica</h3>
+<h3 align="center">Clínica Odontológica - Back End</h3>
 
 <div align="center">
 
