@@ -1,0 +1,30 @@
+header {
+    background-color: black ;
+    color: white;
+    border-bottom: 5px solid #0954A6;
+    padding: 1%;
+    width: 100;
+
+}
+
+body {
+  background-color: ;
+}
+
+form {
+  background-color: white;
+  width: 300px;
+  padding: 2em;
+  margin: 2em auto;
+  border-radius: .2em;
+}
+
+h1 {
+    color: rgb(76, 72, 212);
+}
+
+.fondo {
+    background-image: url("../img/background.jpeg");
+}
+
+
