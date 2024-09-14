@@ -46,7 +46,7 @@ public class pacienteController {
     public ResponseEntity<?> modificarPaciente(@RequestBody Paciente paciente) {
         Optional<Paciente> pacienteEncontrado = servicePaciente.buscarId(paciente.getId());
         if (pacienteEncontrado.isPresent()) {
-            servicePaciente.modificarPaciente(pacienteEncontrado.get());
+            servicePaciente.modificarPaciente(paciente);
             String jsonResponse = "{\"mensaje\": \"El paciente ha sido modificado\"}";
             return ResponseEntity.ok(jsonResponse);
         } else {

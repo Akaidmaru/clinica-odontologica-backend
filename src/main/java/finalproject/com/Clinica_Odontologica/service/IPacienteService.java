@@ -14,7 +14,7 @@ public interface IPacienteService {
     List<Paciente> buscarTodos();
 
     void modificarPaciente(Paciente paciente);
-    Paciente eliminarPaciente(Integer id);
+    void eliminarPaciente(Integer id);
 
     @Query("Select p from Paciente p where p.nombre like %:nombre%")
     List<Paciente> buscarNombre(String nombre);

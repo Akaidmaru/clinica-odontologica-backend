@@ -5,11 +5,14 @@ import finalproject.com.Clinica_Odontologica.dto.response.*;
 import finalproject.com.Clinica_Odontologica.entity.Odontologo;
 import finalproject.com.Clinica_Odontologica.entity.Paciente;
 import finalproject.com.Clinica_Odontologica.entity.Turno;
+import finalproject.com.Clinica_Odontologica.exception.ResourceNotFoundException;
 import finalproject.com.Clinica_Odontologica.repository.ITurnoRepository;
 import finalproject.com.Clinica_Odontologica.service.ITurnoService;
 import finalproject.com.Clinica_Odontologica.service.IOdontologoService;
 import finalproject.com.Clinica_Odontologica.service.IPacienteService;
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +23,7 @@ import java.util.Optional;
 
 @Service
 public class ServiceTurno implements ITurnoService {
+    private final Logger logger = LoggerFactory.getLogger(ServiceTurno.class);
     private ITurnoRepository turnoRepository;
     private IPacienteService servicePaciente;
     private IOdontologoService serviceOdontologo;
@@ -37,21 +41,28 @@ public class ServiceTurno implements ITurnoService {
         Optional<Paciente> paciente = servicePaciente.buscarId(turnoRequestDto.getPaciente_id());
         Optional<Odontologo> odontologo = serviceOdontologo.buscarId(turnoRequestDto.getOdontologo_id());
         Turno turno = new Turno();
-        Turno turnoDB = null;
-        TurnoResponseDto turnoReturn = null;
-        turno.setPaciente(paciente.get());
-        turno.setOdontologo(odontologo.get());
-        turno.setFecha(LocalDate.parse(turnoRequestDto.getFecha()));
-        turnoDB = turnoRepository.save(turno);
-        turnoReturn = turnoMappingResponse(turnoDB);
+        Turno turnoDesdeDb = null;
+        TurnoResponseDto turnoARetornar = null;
+        if (paciente.isPresent() && odontologo.isPresent()) {
 
-        return turnoReturn;
+            turno.setPaciente(paciente.get());
+            turno.setOdontologo(odontologo.get());
+            turno.setFecha(LocalDate.parse(turnoRequestDto.getFecha()));
+            turnoDesdeDb = turnoRepository.save(turno);
+            turnoARetornar = turnoMappingResponse(turnoDesdeDb);
+            logger.info("Turno guardado correctamente.");
+            return turnoARetornar;
+        } else {
+            logger.info("El turno no pudo ser guardado. El Odontólogo o el paciente no existen.");
+            throw new ResourceNotFoundException("El turno no pudo ser guardado, el Odontólogo o el paciente no existen.");
+        }
     }
 
     @Override
     public Optional<TurnoResponseDto> buscarId(Integer id){
         Optional<Turno> turnoDB = turnoRepository.findById(id);
         TurnoResponseDto turnoResponseDto = turnoMappingResponse(turnoDB.get());
+        logger.info("Turno encontrado: " + turnoResponseDto);
         return Optional.of(turnoResponseDto);
     }
 
@@ -79,8 +90,14 @@ public class ServiceTurno implements ITurnoService {
 
     @Override
     public void eliminarTurno(Integer id) {
-        Optional<TurnoResponseDto> turnoEncontrado = buscarId(id);
-        turnoRepository.deleteById(id);
+        Optional<Turno> turnoEncontrado = turnoRepository.findById(id);
+        if(turnoEncontrado.isPresent()){
+            logger.info("Paciente eliminado satisfactoriamente.");
+            turnoRepository.deleteById(id);
+        }else{
+            logger.info("El paciente no fue encontrado. Id: " + id + " Not found.");
+            throw new ResourceNotFoundException("El paciente no fue encontrado. Id: " + id + " Not found.");
+        }
     }
 
     private TurnoResponseDto obtainTurnoResponse(Turno turnoDB){
@@ -117,7 +134,14 @@ public class ServiceTurno implements ITurnoService {
 
     @Override
     public List<Turno> buscarTurnoOdontologo(String matriculaOdontologo){
-        return turnoRepository.buscarTurnoMatriculaOdontologo(matriculaOdontologo);
+        List<Turno> turnosEncontrados = turnoRepository.buscarTurnoMatriculaOdontologo(matriculaOdontologo);
+        if (turnosEncontrados.isEmpty()) {
+            logger.info("No se encontraron turnos para este odontologo");
+            throw new ResourceNotFoundException("No se encontraron turnos para este odontologo");
+        }else {
+            logger.info("Turnos encontrados: " + turnosEncontrados.size());
+            return turnosEncontrados;
+        }
     }
 
 }
