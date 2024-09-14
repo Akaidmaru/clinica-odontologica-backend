@@ -1,6 +1,5 @@
 package finalproject.com.Clinica_Odontologica.service.impl;
 
-import finalproject.com.Clinica_Odontologica.entity.Odontologo;
 import finalproject.com.Clinica_Odontologica.entity.Paciente;
 import finalproject.com.Clinica_Odontologica.repository.IPacienteRepository;
 import finalproject.com.Clinica_Odontologica.service.IPacienteService;

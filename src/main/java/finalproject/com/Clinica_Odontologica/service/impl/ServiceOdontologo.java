@@ -108,6 +108,7 @@ public class ServiceOdontologo implements IOdontologoService {
             logger.info("No se encontraron odontólogos.");
             throw new ResourceNotFoundException("No se encontraron odontólogos.");
         }else {
+            logger.info("Número de odontólogos encontrados: " + odontologos.size());
             return odontologos;
         }
     }
