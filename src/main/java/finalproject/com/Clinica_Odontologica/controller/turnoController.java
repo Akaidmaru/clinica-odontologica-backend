@@ -6,7 +6,6 @@ import finalproject.com.Clinica_Odontologica.dto.response.TurnoResponseDto;
 import finalproject.com.Clinica_Odontologica.entity.Turno;
 import finalproject.com.Clinica_Odontologica.service.impl.ServiceTurno;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,7 +32,6 @@ public class turnoController {
         }
     }
 
-
     @GetMapping("/buscartodos")
     public ResponseEntity<List<TurnoResponseDto>> buscarTodos(){
         return ResponseEntity.ok(serviceTurno.buscarTodos());
@@ -50,6 +48,17 @@ public class turnoController {
         serviceTurno.eliminarTurno(id);
         return ResponseEntity.ok("{\"mensaje\": \"El turno fue eliminado\"}");
     }
+
+    @GetMapping("/buscarApellido/{apellido}")
+    public ResponseEntity<List<Turno>> buscarTurnoApellidoPaciente(@PathVariable String apellido){
+        return ResponseEntity.ok(serviceTurno.buscarTurnoPaciente(apellido));
+    }
+
+    @GetMapping("/buscarMatricula/{matricula}")
+    public ResponseEntity<List<Turno>> buscarTurnoApellidoOdontologo(@PathVariable String matricula){
+        return ResponseEntity.ok(serviceTurno.buscarTurnoOdontologo(matricula));
+    }
+
     }
 
 

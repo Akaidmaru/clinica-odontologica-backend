@@ -7,10 +7,11 @@ import finalproject.com.Clinica_Odontologica.entity.Paciente;
 import finalproject.com.Clinica_Odontologica.entity.Turno;
 import finalproject.com.Clinica_Odontologica.repository.ITurnoRepository;
 import finalproject.com.Clinica_Odontologica.service.ITurnoService;
-import finalproject.com.Clinica_Odontologica.config.ModelMapperConfig;
+import finalproject.com.Clinica_Odontologica.service.IOdontologoService;
+import finalproject.com.Clinica_Odontologica.service.IPacienteService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.modelmapper.ModelMapper;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -20,8 +21,8 @@ import java.util.Optional;
 @Service
 public class ServiceTurno implements ITurnoService {
     private ITurnoRepository turnoRepository;
-    private ServicePaciente servicePaciente;
-    private ServiceOdontologo serviceOdontologo;
+    private IPacienteService servicePaciente;
+    private IOdontologoService serviceOdontologo;
     @Autowired
     private ModelMapper modelMapper;
 
@@ -38,26 +39,20 @@ public class ServiceTurno implements ITurnoService {
         Turno turno = new Turno();
         Turno turnoDB = null;
         TurnoResponseDto turnoReturn = null;
-        if (paciente.isPresent() && odontologo.isPresent()){
-            turno.setPaciente(paciente.get());
-            turno.setOdontologo(odontologo.get());
-            turno.setFecha(LocalDate.parse(turnoRequestDto.getFecha()));
+        turno.setPaciente(paciente.get());
+        turno.setOdontologo(odontologo.get());
+        turno.setFecha(LocalDate.parse(turnoRequestDto.getFecha()));
+        turnoDB = turnoRepository.save(turno);
+        turnoReturn = turnoMappingResponse(turnoDB);
 
-            turnoDB = turnoRepository.save(turno);
-
-            turnoReturn = turnoMappingResponse(turnoDB);
-        }
         return turnoReturn;
     }
 
     @Override
     public Optional<TurnoResponseDto> buscarId(Integer id){
         Optional<Turno> turnoDB = turnoRepository.findById(id);
-        TurnoResponseDto turnoResponseDto = null;
-        if(turnoDB.isPresent()){
-            turnoResponseDto = turnoMappingResponse(turnoDB.get());
-        }
-        return Optional.ofNullable(turnoResponseDto);
+        TurnoResponseDto turnoResponseDto = turnoMappingResponse(turnoDB.get());
+        return Optional.of(turnoResponseDto);
     }
 
     @Override
@@ -75,7 +70,7 @@ public class ServiceTurno implements ITurnoService {
     public void modificarTurno(TurnoModifyDto turnoModifyDto) {
         Optional<Paciente> paciente = servicePaciente.buscarId(turnoModifyDto.getPaciente_id());
         Optional<Odontologo> odontologo = serviceOdontologo.buscarId(turnoModifyDto.getOdontologo_id());
-        Turno turno = null;
+        Turno turno;
         if (paciente.isPresent() && odontologo.isPresent()) {
             turno = new Turno(turnoModifyDto.getId(), paciente.get(), odontologo.get(), LocalDate.parse(turnoModifyDto.getFecha()));
             turnoRepository.save(turno);
@@ -84,10 +79,11 @@ public class ServiceTurno implements ITurnoService {
 
     @Override
     public void eliminarTurno(Integer id) {
+        Optional<TurnoResponseDto> turnoEncontrado = buscarId(id);
         turnoRepository.deleteById(id);
     }
 
-    private TurnoResponseDto transformTurnoToResponse(Turno turnoDB){
+    private TurnoResponseDto obtainTurnoResponse(Turno turnoDB){
         OdontologoResponseDto odontologoResponseDto = new OdontologoResponseDto(
                 turnoDB.getOdontologo().getId(), turnoDB.getOdontologo().getMatricula(),
                 turnoDB.getOdontologo().getNombre(), turnoDB.getOdontologo().getApellido()
@@ -112,13 +108,16 @@ public class ServiceTurno implements ITurnoService {
         return turnoResponseDto;
     }
 
+
     @Override
     public List<Turno> buscarTurnoPaciente(String apellidoPaciente){
         return turnoRepository.buscarTurnoApellidoPaciente(apellidoPaciente);
     }
 
+
     @Override
     public List<Turno> buscarTurnoOdontologo(String matriculaOdontologo){
         return turnoRepository.buscarTurnoMatriculaOdontologo(matriculaOdontologo);
     }
+
 }

@@ -43,7 +43,7 @@ public class odontologoController {
     public ResponseEntity<?> modificarOdontologo(@RequestBody Odontologo odontologo) {
         Optional<Odontologo> odontologoEncontrado = serviceOdontologo.buscarId(odontologo.getId());
         if (odontologoEncontrado.isPresent()) {
-            serviceOdontologo.modificarOdontologo(odontologoEncontrado.get());
+            serviceOdontologo.modificarOdontologo(odontologo);
             String jsonResponse = "{\"mensaje\": \"El odontólogo ha sido modificado\"}";
             return ResponseEntity.ok(jsonResponse);
         } else {
@@ -75,7 +75,12 @@ public class odontologoController {
 
     }
 
-    @GetMapping("/buscar/{matricula}")
+    @GetMapping("/buscarApellidoNombre")
+    public ResponseEntity<List<Odontologo>> buscarApellidoYNombre(@RequestParam String apellido, @RequestParam String nombre){
+        return ResponseEntity.ok(serviceOdontologo.buscarPorApellidoyNombre(apellido, nombre));
+    }
+
+    @GetMapping("/buscarMatricula/{matricula}")
     public ResponseEntity<Optional<Odontologo>> buscarMatricula(@PathVariable String matricula){
         Optional<Odontologo> odontologoEncontrado = serviceOdontologo.buscarMatricula(matricula);
         if (odontologoEncontrado.isPresent()){

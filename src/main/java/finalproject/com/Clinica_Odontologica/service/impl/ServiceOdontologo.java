@@ -53,6 +53,17 @@ public class ServiceOdontologo implements IOdontologoService {
         return odontologoRepository.findByNombre(nombre);
     }
 
+    @Override
+    public List<Odontologo> buscarPorApellidoyNombre(String apellido, String nombre) {
+        List<Odontologo> odontologos = odontologoRepository.findByApellidoAndNombre(apellido, nombre);
+        if(odontologos.isEmpty()){
+            return null;
+            // logger.info("no se encontraron odontologos que coincidan con la busqueda");
+            //throw new ResourceNotFoundException("No se encontraron odontologos con ese nombre y apellido");
+        }else {
+            return odontologos;
+        }
+    }
 
     @Override
     public Optional<Odontologo> buscarMatricula(String matricula) {

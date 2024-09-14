@@ -58,4 +58,16 @@ public class ServicePaciente implements IPacienteService {
         return pacienteRepository.findByApellido(apellido);
     }
 
+
+    @Override
+    public List<Paciente> buscarPorApellidoyNombre(String apellido, String nombre) {
+        List<Paciente> pacientes = pacienteRepository.findByApellidoAndNombre(apellido, nombre);
+        if(pacientes.isEmpty()){
+            return null;
+            // logger.info("no se encontraron odontologos que coincidan con la busqueda");
+            //throw new ResourceNotFoundException("No se encontraron odontologos con ese nombre y apellido");
+        }else {
+            return pacientes;
+        }
+    }
 }

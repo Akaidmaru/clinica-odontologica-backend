@@ -19,6 +19,7 @@ public interface IOdontologoRepository extends JpaRepository<Odontologo, Integer
 
     Optional<Odontologo> findByMatricula(String matricula); //FIX
 
+    List<Odontologo> findByApellidoAndNombre(String apellido, String nombre);
 
 
 

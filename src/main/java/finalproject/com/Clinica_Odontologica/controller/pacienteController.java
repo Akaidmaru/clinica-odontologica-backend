@@ -1,5 +1,6 @@
 package finalproject.com.Clinica_Odontologica.controller;
 
+import finalproject.com.Clinica_Odontologica.entity.Odontologo;
 import finalproject.com.Clinica_Odontologica.entity.Paciente;
 import finalproject.com.Clinica_Odontologica.service.impl.ServicePaciente;
 import org.springframework.http.HttpStatusCode;
@@ -77,7 +78,12 @@ public class pacienteController {
 
     }
 
-    @GetMapping("/buscar/{dni}")
+    @GetMapping("/buscarApellidoNombre")
+    public ResponseEntity<List<Paciente>> buscarApellidoYNombre(@RequestParam String apellido, @RequestParam String nombre){
+        return ResponseEntity.ok(servicePaciente.buscarPorApellidoyNombre(apellido, nombre));
+    }
+
+    @GetMapping("/buscarDni/{dni}")
     public ResponseEntity<Optional<Paciente>> buscarDni(@PathVariable String dni){
         Optional<Paciente> pacienteEncontrado = servicePaciente.buscarDni(dni);
         if (pacienteEncontrado.isPresent()){

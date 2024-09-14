@@ -22,4 +22,7 @@ public interface IOdontologoService {
     List<Odontologo> buscarNombre(String nombre);
 
     Optional<Odontologo> buscarMatricula(String matricula);
+
+    List<Odontologo> buscarPorApellidoyNombre(String apellido, String nombre);
+
 }
