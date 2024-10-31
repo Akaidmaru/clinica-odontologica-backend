@@ -14,6 +14,9 @@
 
 </div>
 
+## 📖 Versión en Español <a name = "version-en-espanol"></a>
+
+Para la versión en español, consulta [README-es.md](README-es.md).
 
 ## 📝 Table of Contents
 
